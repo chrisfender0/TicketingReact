@@ -1,5 +1,7 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
+import TicketTable from "./TicketTable";
+import "./Ticket.css"
 
 class Ticket extends React.Component {
 
@@ -8,53 +10,29 @@ class Ticket extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items:[]
         }
     }
 
-    componentDidMount(){
-        fetch("http://localhost:8081/ticket/getAllTickets")
-        .then(res=>res.json())
-        .then(
-            (data) => {
-                this.setState({
-                    items: data
-                });
-                console.log(data);
-            }
-        )
-    }
-
     render(){
-        const {items} = this.state;
-        return (
-            <div>
-                <Table>
-                <thead>
-                    <tr>
-                        <th>Subject</th>
-                        <th>Status</th>
-                        <th>Priority</th>
-                        <th>Note</th>
-                        <th>Date Created</th>
-                        <th>Date Modified</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {items.map(item => (
-                        <tr key={item.id}>
-                            <td>{item.subject}</td>
-                            <td>{item.status}</td>
-                            <td>{item.priority}</td>
-                            <td>{item.note}</td>
-                            <td>{item.dateCreated}</td>
-                            <td>{item.dateModified}</td>
-                        </tr>
-                    ))}
-                </tbody>
-                </Table>
-            </div>
+        return(
+            <Container fluid>
+                <Row>
+                    <Col></Col>
+                    <Col><h3>Welcome to the ticketing system</h3></Col>
+                    <Col></Col>
+                </Row>
+                <Row>
+                    <Col></Col>
+                    <Col xs={6}>
+                        <div>
+                            <TicketTable />
+                        </div>
+                    </Col>
+                    <Col></Col>
+                </Row>
+            </Container>
         )
+
     }
 };
 
