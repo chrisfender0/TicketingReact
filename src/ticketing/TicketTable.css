@@ -1,0 +1,30 @@
+table {
+    background-color:lavender;
+}
+
+thead {
+    padding-bottom: 1.25rem !important;
+    background-color: darkblue;
+    color: white;
+}
+
+td {
+    padding-bottom: 1rem !important;
+}
+
+.pill {
+    border: solid black 1px;
+    padding: 0.3rem;
+    border-radius: 15px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.pill-High {
+    background-color: red;
+}
+.pill-Medium {
+    background-color: orange;
+}
+.pill-Low {
+    background-color: greenyellow;
+}
