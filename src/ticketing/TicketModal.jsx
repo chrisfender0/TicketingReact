@@ -3,13 +3,13 @@ import {Modal, Button} from 'react-bootstrap';
 
 class TicketModal extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            isLoaded: false,
-            error: null
-        }
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         isLoaded: false,
+    //         error: null
+    //     }
+    // }
 
     handleClose = () => {
         return "false";
