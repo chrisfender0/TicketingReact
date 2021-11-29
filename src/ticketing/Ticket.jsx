@@ -26,6 +26,7 @@ class Ticket extends React.Component {
         this.setState({
             showCreateNewModal: show
         })
+        this.showReceivedUpdateHandler()
     }
 
     showReceivedUpdateHandler = () => {
