@@ -11,6 +11,12 @@ copy the webpack.config.js from github
 copy the babel.config.js from github
 ### netlify 
 
+### bootstrap and react-bootstrap
+used for tables and modals 
+
+### react-dropdown
+for modal priority dropdown 
+
 ## run following commands from project root 
 yarn install 
 yarn run dev 

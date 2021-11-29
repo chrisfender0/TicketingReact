@@ -6,18 +6,17 @@ import 'react-dropdown/style.css';
 
 class TicketModal extends React.Component {
 
-    constructor(props, showComponent, showModalHandler, ticketObject){
+    constructor(props, showCreateNewModal, showCreateNewModalHandler){
         super(props);
         this.state = {
             isLoaded: false,
             error: null,
             show: null,
-            newTicketObject: null
+            ticket: null
         }
-        this.formTicketObject();
     }
     handleClose = () => {
-        this.props.showModalHandler(false);
+        this.props.showCreateNewModalHandler(false);
         this.setState({
             isLoaded: false
         })
@@ -27,51 +26,76 @@ class TicketModal extends React.Component {
         this.setState({
             isLoaded: true,
         })
+        this.formTicketObject();
         console.log("TicketModal mounted");
     }
 
     handleSave = () => {
-        console.log(this.state.newTicketObject)
+        this.hydrateTicketObject();
+        console.log(this.state)
         fetch("http://localhost:8081/ticket/createTicket", {
             method: 'POST',
             headers : { 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: '{"subject":"test from react","note":"hello from react","priority":"Low","status":"New"}'
+            body: JSON.stringify(this.state.ticket)
         })
         .then(res => res.json())
-        .then((data)=> {
-            console.log(data);
+        .then((res)=> {
+            console.log(res);
         })
         this.handleClose();
     }
 
-    formTicketObject(){
-        const ticket = JSON.parse('{"subject":"test from react","note":"holle from react","priority":"Low","status":"New"}');
+    formTicketObject = () => {
+        const ticket = JSON.parse('{}');
+        ticket.status = "New";
+        console.log(ticket);
         this.setState({
-            newTicketObject: ticket
+            ticket: ticket
+        });
+    }
+
+    hydrateTicketObject = () => {
+        const tempTicket = this.state.ticket;
+        const subject = document.getElementById('ticketSubject');
+        const priority = document.getElementsByClassName('is-selected');
+        const note = document.getElementById('ticketNote');
+        tempTicket.subject = subject.value;
+        tempTicket.priority = priority[0].getInnerHTML();
+        tempTicket.note = note.value;
+        this.setState({
+            ticket: tempTicket
         });
     }
 
     render(){
-        const {ticketObject} = this.props;
         const options = ['Low', 'Medium', 'High'];
         return (
             this.state.isLoaded === true ? 
-            <Modal show={this.props.showComponent} onHide={this.handleClose}>
+            <Modal show={this.props.showCreateNewModal} onHide={this.handleClose} id="CreateNewTicketModal">
                 <Modal.Header closeButton>
-                    <Modal.Title>{ticketObject ? ticketObject.subject : 'New Ticket'}</Modal.Title>
+                    <Modal.Title>{'New Ticket'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div>
-                        <span>{ticketObject ? ticketObject.status : 'New'}</span>
+                        <label htmlFor="ticketSubject">Subject:</label>
                         <br />
-                        <span>{ticketObject ? ticketObject.priority : 
-                            <Dropdown options={options} onChange={this._onSelect} value={options[0]} placeholder="Select an option" />
+                        <input type="text" id="ticketSubject" name="ticketSubject"/>
+                        <br />
+                        <span>Priority:</span>
+                        <br />
+                        <span>{
+                            <Dropdown 
+                                id="ticketPriority" 
+                                options={options} 
+                                value={options[0]} 
+                                placeholder="Select an option" />
                         }</span>
+                        <label>Note:</label>
                         <br />
-                        <textarea name="note" id="note" cols="30" rows="10" defaultValue={ticketObject ? ticketObject.note : ''} placeholder="Enter Text"></textarea>
+                        <textarea name="note" id="ticketNote" cols="30" rows="10" placeholder="Enter Text"></textarea>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

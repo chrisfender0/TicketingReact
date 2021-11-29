@@ -1,4 +1,9 @@
 h3{
     text-align: center;
     padding: 1rem;
+    color: white;
+}
+
+body {
+    background-color: black;
 }

@@ -1,17 +1,20 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import "./TicketTable.css";
-import TicketModal from "./TicketModal";
+import UpdateTicketModal from "./UpdateTicketModal";
 
 class TicketTable extends React.Component{
 
-    constructor(props){
+    constructor(props, receivedUpdate, showModalHandler){
         super(props);
         this.state = {
             error: null,
             isLoaded: false,
             items:[],
-            tModal: null
+            tModal: null,
+            showComponent: false,
+            showReceivedUpdateHandler: this.props.showReceivedUpdateHandler,
+            ticketObject: null
         }
     }
 
@@ -37,19 +40,41 @@ class TicketTable extends React.Component{
     }
 
    pickTicket = (event) => {
-        console.log(event);
-        let test = event.target.closest("tr");
-        console.log(test.getAttribute("id"));
-        this.setState({showComponent:true})
+        const id = event.target.closest("tr").getAttribute("id");
+        console.log(id);
+        this.state.items.forEach((item) => {
+            if(item.id === id){
+                console.log("matched");
+                this.setState({
+                    ticketObject: item,
+                    showComponent: true
+                })
+            }
+        });
+   }
+
+   showComponentHandler = (show) => {
+        this.setState({
+            showComponent: show
+        })
+        if(show===false){
+            this.props.showReceivedUpdateHandler()
+        }
    }
 
     render(){
-        const {items, showComponent} = this.state;
+        console.log("Table called anew")
+        const {items, showComponent, ticketObject} = this.state;
         return (
             <div>
                 <div>
                 {showComponent ?
-                    <TicketModal /> :
+                    <UpdateTicketModal 
+                        showComponent={showComponent} 
+                        showComponentHandler={this.showComponentHandler} 
+                        key={showComponent}
+                        ticketObject={ticketObject}
+                        /> :
                     null
                 }
                 </div>
@@ -69,7 +94,7 @@ class TicketTable extends React.Component{
                             <tr key={item.id} id={item.id} onClick={this.pickTicket}>
                                 <td><span>{item.subject}</span></td>
                                 <td><span>{item.status}</span></td>
-                                <td><span className={`pill pill-${item.priority}`}>{item.priority}</span></td>
+                                <td className="pill-parent"><span className={`pill pill-${item.priority}`}>{item.priority}</span></td>
                                 <td><span>{item.note}</span></td>
                                 <td><span>{item.dateCreated}</span></td>
                                 <td><span>{item.dateModified}</span></td>
