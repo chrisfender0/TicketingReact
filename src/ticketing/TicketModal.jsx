@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {Modal, Button} from 'react-bootstrap';
 import './TicketModal.css'
 import Dropdown from 'react-dropdown';

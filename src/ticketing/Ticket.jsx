@@ -3,7 +3,6 @@ import { Row, Col, Container } from "react-bootstrap";
 import TicketTable from "./TicketTable";
 import CreateNewTicketModal from "./CreateNewTicketModal";
 import "./Ticket.css"
-import { tSParenthesizedType } from "@babel/types";
 
 class Ticket extends React.Component {
 
