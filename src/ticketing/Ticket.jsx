@@ -30,6 +30,7 @@ class Ticket extends React.Component {
     }
 
     showReceivedUpdateHandler = () => {
+        setTimeout(()=>{
         console.log("showReceivedUpdateHandler called");
         if(this.state.receivedUpdate === true){
             this.setState({
@@ -40,6 +41,8 @@ class Ticket extends React.Component {
                 receivedUpdate: true
             })
         }
+        },1000);
+        
     }
 
     render(){
