@@ -31,6 +31,22 @@ td:first-child, th:first-child {
     border-left: none;
 }
 
+td:first-child span {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 150px;
+    display: block;
+}
+
+.note span {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 300px;
+    display: block;
+}
+
 .pill {
     display: table;
     text-align: center;
@@ -54,8 +70,12 @@ td:first-child, th:first-child {
     background-color: rgb(250, 204, 118);
 }
 .pill-Low {
-    background-color: greenyellow;
+    background-color: green;
 }
 .pill-Low:hover {
-    background-color: rgb(213, 248, 161);
+    background-color: rgb(120, 250, 120);
+}
+
+.date {
+    width: 100px;
 }

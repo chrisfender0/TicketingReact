@@ -6,7 +6,7 @@ import 'react-dropdown/style.css';
 
 class TicketModal extends React.Component {
 
-    constructor(props, showCreateNewModal, showCreateNewModalHandler){
+    constructor(props, showCreateNewModal, showCreateNewModalHandler, showReceivedUpdateHandler){
         super(props);
         this.state = {
             isLoaded: false,
@@ -17,6 +17,7 @@ class TicketModal extends React.Component {
     }
     handleClose = () => {
         this.props.showCreateNewModalHandler(false);
+        this.props.showReceivedUpdateHandler();
         this.setState({
             isLoaded: false
         })

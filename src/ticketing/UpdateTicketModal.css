@@ -1,0 +1,10 @@
+#deleteTicket {
+    background-color: white;
+    border: 2px solid red;
+    color: black;
+    transition-duration: 0.4s;
+}
+#deleteTicket:hover {
+    background-color: red;
+    color: white;
+}

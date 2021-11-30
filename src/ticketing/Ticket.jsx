@@ -30,6 +30,7 @@ class Ticket extends React.Component {
     }
 
     showReceivedUpdateHandler = () => {
+        console.log("showReceivedUpdateHandler called");
         if(this.state.receivedUpdate === true){
             this.setState({
                 receivedUpdate: false
@@ -52,10 +53,10 @@ class Ticket extends React.Component {
                 </Row>
                 <Row>
                     <Col></Col>
-                    <Col xs={6}><button onClick={this.createNewTicket}>Create New Ticket</button></Col>
+                    <Col xs={6} id="buttonDiv"><button id="createNewTicketButton" onClick={this.createNewTicket}>Create New Ticket</button></Col>
                     <Col><div>
                         {showCreateNewModal ?
-                            <CreateNewTicketModal showCreateNewModal={showCreateNewModal} showCreateNewModalHandler={this.showCreateNewModalHandler} key={showCreateNewModal}/> :
+                            <CreateNewTicketModal showReceivedUpdateHandler={this.showReceivedUpdateHandler} showCreateNewModal={showCreateNewModal} showCreateNewModalHandler={this.showCreateNewModalHandler} key={showCreateNewModal}/> :
                         null}
                         </div></Col>
                 </Row>

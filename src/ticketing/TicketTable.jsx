@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import "./TicketTable.css";
 import UpdateTicketModal from "./UpdateTicketModal";
+import format from "date-fns/format";
 
 class TicketTable extends React.Component{
 
@@ -39,7 +40,7 @@ class TicketTable extends React.Component{
         )
     }
 
-   pickTicket = (event) => {
+    pickTicket = (event) => {
         const id = event.target.closest("tr").getAttribute("id");
         console.log(id);
         this.state.items.forEach((item) => {
@@ -51,19 +52,23 @@ class TicketTable extends React.Component{
                 })
             }
         });
-   }
+    }
 
-   showComponentHandler = (show) => {
+    showComponentHandler = (show) => {
         this.setState({
             showComponent: show
         })
         if(show===false){
             this.props.showReceivedUpdateHandler()
         }
-   }
+    }
+
+    formatDate = (datePassed) => {
+        const date = new Date(datePassed);
+        return format(date, 'MM-dd-yyyy hh:mm a');
+    }
 
     render(){
-        console.log("Table called anew")
         const {items, showComponent, ticketObject} = this.state;
         return (
             <div>
@@ -95,9 +100,9 @@ class TicketTable extends React.Component{
                                 <td><span>{item.subject}</span></td>
                                 <td><span>{item.status}</span></td>
                                 <td className="pill-parent"><span className={`pill pill-${item.priority}`}>{item.priority}</span></td>
-                                <td><span>{item.note}</span></td>
-                                <td><span>{item.dateCreated}</span></td>
-                                <td><span>{item.dateModified}</span></td>
+                                <td className="note"><span>{item.note}</span></td>
+                                <td className="date"><span>{this.formatDate(item.dateCreated)}</span></td>
+                                <td className="date"><span>{this.formatDate(item.dateModified)}</span></td>
                             </tr>
                         ))}
                     </tbody>

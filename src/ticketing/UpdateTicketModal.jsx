@@ -3,6 +3,7 @@ import {Modal, Button} from 'react-bootstrap';
 import './TicketModal.css'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import './UpdateTicketModal.css'
 
 class TicketModal extends React.Component {
 
@@ -48,6 +49,22 @@ class TicketModal extends React.Component {
 
     handleResolvedCall = () => {
         fetch("http://localhost:8081/ticket/resolveTicket", {
+            method: 'POST',
+            headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(this.state.ticket)
+        })
+        .then(res => res.json())
+        .then((data)=> {
+            console.log(data);
+        })
+        this.handleClose();
+    }
+
+    handeDeleteCall = () => {
+        fetch("http://localhost:8081/ticket/deleteTicket", {
             method: 'POST',
             headers : { 
                 'Content-Type': 'application/json',
@@ -137,6 +154,9 @@ class TicketModal extends React.Component {
                     </Button>
                     <Button onClick={this.resolveTicket}>
                         Resolve Ticket
+                    </Button>
+                    <Button id="deleteTicket" onClick={this.handeDeleteCall}>
+                        Delete Ticket
                     </Button>
                 </Modal.Footer>
             </Modal>

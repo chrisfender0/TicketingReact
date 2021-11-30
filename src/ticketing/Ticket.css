@@ -7,3 +7,21 @@ h3{
 body {
     background-color: black;
 }
+
+#buttonDiv {
+    padding-bottom: 10px;
+}
+
+#createNewTicketButton {
+    font-weight: bold;
+    background-color: white;
+    padding: 16px 32px;
+    border: 2px solid darkblue;
+    border-radius: 5px;
+    transition-duration: 0.4s;
+}
+
+#createNewTicketButton:hover {
+    background-color: darkblue;
+    color: white
+}
