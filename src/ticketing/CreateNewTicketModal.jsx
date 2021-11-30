@@ -34,7 +34,7 @@ class TicketModal extends React.Component {
     handleSave = () => {
         this.hydrateTicketObject();
         console.log(this.state)
-        fetch("http://localhost:8081/ticket/createTicket", {
+        fetch("https://chrisfender0-ticketing-rest.herokuapp.com/ticket/createTicket", {
             method: 'POST',
             headers : { 
                 'Content-Type': 'application/json',
