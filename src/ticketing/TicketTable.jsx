@@ -20,7 +20,7 @@ class TicketTable extends React.Component{
     }
 
     componentDidMount(){
-        fetch("http://localhost:8081/ticket/getAllTickets")
+        fetch("https://chrisfender0-ticketing-rest.herokuapp.com/ticket/getAllTickets")
         .then(res=>res.json())
         .then(
             (data) => {

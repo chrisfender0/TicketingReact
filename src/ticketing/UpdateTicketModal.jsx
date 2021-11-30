@@ -32,7 +32,7 @@ class TicketModal extends React.Component {
     }
 
     handleUpdateCall = () => {
-        fetch("http://localhost:8081/ticket/updateTicket", {
+        fetch("https://chrisfender0-ticketing-rest.herokuapp.com/ticket/updateTicket", {
             method: 'POST',
             headers : { 
                 'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ class TicketModal extends React.Component {
     }
 
     handleResolvedCall = () => {
-        fetch("http://localhost:8081/ticket/resolveTicket", {
+        fetch("https://chrisfender0-ticketing-rest.herokuapp.com/ticket/resolveTicket", {
             method: 'POST',
             headers : { 
                 'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ class TicketModal extends React.Component {
     }
 
     handeDeleteCall = () => {
-        fetch("http://localhost:8081/ticket/deleteTicket", {
+        fetch("https://chrisfender0-ticketing-rest.herokuapp.com/ticket/deleteTicket", {
             method: 'POST',
             headers : { 
                 'Content-Type': 'application/json',
